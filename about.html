@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us — ShopWave</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .about-hero {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 100px 24px;
+    }
+    .about-hero-label { color: var(--accent); font-size:0.78rem; text-transform:uppercase; letter-spacing:2px; font-weight:700; margin-bottom:16px; }
+    .about-hero h1 { font-family: var(--font-display); font-size: clamp(2.4rem,5vw,4rem); font-weight:700; line-height:1.2; margin-bottom:20px; }
+    .about-hero p { font-size:1.1rem; color:rgba(255,255,255,0.7); max-width:560px; margin:0 auto; line-height:1.7; }
+
+    .about-story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-story-visual {
+      background: linear-gradient(135deg, rgba(233,69,96,0.08), rgba(26,26,46,0.04));
+      border-radius: var(--radius);
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8rem;
+      border: 1px solid var(--border);
+    }
+    .about-story-text h2 { font-family:var(--font-display); font-size:2.2rem; font-weight:700; margin-bottom:20px; line-height:1.3; }
+    .about-story-text p { color:var(--text-muted); line-height:1.8; margin-bottom:16px; }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 28px;
+    }
+    .value-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+    .value-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+    .value-icon { font-size: 2.4rem; margin-bottom: 16px; }
+    .value-title { font-family:var(--font-display); font-size:1.2rem; font-weight:700; margin-bottom:10px; }
+    .value-text { color:var(--text-muted); font-size:0.92rem; line-height:1.7; }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 28px;
+    }
+    .team-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 36px 24px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+    .team-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+    .team-avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; margin: 0 auto 16px;
+      color: #fff;
+    }
+    .team-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+    .team-role { color: var(--accent); font-size: 0.85rem; font-weight: 600; margin-bottom: 12px; }
+    .team-bio { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .about-story { grid-template-columns:1fr; gap:40px; }
+      .values-grid { grid-template-columns:1fr; }
+      .team-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width: 480px) { .team-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Shop<span>Wave</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="cart.html" class="nav-icon">🛒<span class="cart-badge" style="display:none">0</span></a>
+        <button class="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="about-hero">
+    <div class="about-hero-label">Our Story</div>
+    <h1>We Love What We Sell</h1>
+    <p>ShopWave was born from a simple idea — everyone deserves access to beautiful, quality products at fair prices.</p>
+  </div>
+
+  <!-- STORY -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="about-story">
+        <div class="about-story-visual">🛍️</div>
+        <div class="about-story-text">
+          <h2>From a Small Idea to a Big Wave</h2>
+          <p>Founded in 2020 by a group of friends who were tired of settling for overpriced, low-quality goods, ShopWave set out to change how people shop online.</p>
+          <p>We hand-pick every product in our catalog, working directly with makers and brands we trust. No middlemen, no markups. Just honest pricing and great design.</p>
+          <p>Today, we serve over 50,000 happy customers across the country, and we're just getting started.</p>
+          <a href="products.html" class="btn btn-primary" style="margin-top:16px;">Explore Products →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="section" style="background:#fff;">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">What We Stand For</div>
+        <h2 class="section-title">Our Values</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">✅</div>
+          <div class="value-title">Quality First</div>
+          <div class="value-text">Every product is tested and reviewed before it reaches our shelves. We don't sell anything we wouldn't use ourselves.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">💰</div>
+          <div class="value-title">Fair Pricing</div>
+          <div class="value-text">No hidden fees. No inflated prices. We negotiate directly with suppliers to pass savings on to you.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🌍</div>
+          <div class="value-title">Sustainability</div>
+          <div class="value-text">We're committed to reducing our environmental footprint — from eco-friendly packaging to carbon-neutral shipping.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">The People Behind ShopWave</div>
+        <h2 class="section-title">Meet the Team</h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">👩‍💻</div>
+          <div class="team-name">Member 1</div>
+          <div class="team-role">UI/UX Designer</div>
+          <div class="team-bio">Crafted the visual identity and user experience of ShopWave. Loves bold colors and clean layouts.</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">👨‍💻</div>
+          <div class="team-name">Member 2</div>
+          <div class="team-role">Frontend Developer</div>
+          <div class="team-bio">Built the product catalog and dynamic filtering system. Fan of clean, semantic HTML.</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">👩‍🔬</div>
+          <div class="team-name">Member 3</div>
+          <div class="team-role">Functionality Lead</div>
+          <div class="team-bio">Engineered the cart and checkout flow. Makes sure every click does exactly what it should.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">Shop<span>Wave</span></a>
+          <p>Your one-stop destination for curated fashion, accessories, and lifestyle products.</p>
+          <div class="footer-socials" style="margin-top:20px;">
+            <a href="#">🐦</a><a href="#">📸</a><a href="#">💼</a>
+          </div>
+        </div>
+        <div class="footer-col"><h4>Shop</h4><ul>
+          <li><a href="products.html">All Products</a></li>
+          <li><a href="products.html?category=Clothing">Clothing</a></li>
+          <li><a href="products.html?category=Accessories">Accessories</a></li>
+        </ul></div>
+        <div class="footer-col"><h4>Company</h4><ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul></div>
+        <div class="footer-col"><h4>Support</h4><ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 ShopWave. All rights reserved.</span>
+        <span>Made with ❤️ for Web Technology</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>

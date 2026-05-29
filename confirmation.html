@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Confirmed — ShopWave</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .confirm-page {
+      min-height: calc(100vh - var(--nav-height) - 80px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+    }
+    .confirm-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 56px 48px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .success-icon {
+      width: 96px; height: 96px;
+      background: linear-gradient(135deg, rgba(46,204,113,0.15), rgba(46,204,113,0.05));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      margin: 0 auto 28px;
+      border: 2px solid rgba(46,204,113,0.3);
+      animation: pop 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      70% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .confirm-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .confirm-sub { color: var(--text-muted); margin-bottom: 36px; line-height: 1.7; }
+    .order-id {
+      display: inline-block;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 20px;
+      font-family: monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 36px;
+      color: var(--primary);
+    }
+    .order-details {
+      background: var(--bg);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: left;
+      margin-bottom: 36px;
+    }
+    .od-title { font-weight: 700; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; color: var(--text-muted); }
+    .od-row { display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:10px; }
+    .od-row span:last-child { font-weight:600; }
+
+    .order-items { border-top: 1px solid var(--border); padding-top: 16px; margin-top: 16px; }
+    .oi-item { display:flex; align-items:center; gap:10px; margin-bottom:10px; font-size:0.88rem; }
+    .oi-emoji { font-size:1.4rem; }
+    .oi-name { flex:1; }
+    .oi-price { font-weight:700; }
+
+    .confirm-actions { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+    .timeline {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 20px; left: 10%; right: 10%;
+      height: 2px;
+      background: var(--border);
+    }
+    .tl-step { text-align: center; position: relative; z-index: 1; flex: 1; }
+    .tl-dot {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 8px;
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    .tl-step.done .tl-dot { background: var(--success); border-color: var(--success); }
+    .tl-step.active .tl-dot { background: var(--accent); border-color: var(--accent); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(233,69,96,0.4)} 50%{box-shadow:0 0 0 8px rgba(233,69,96,0)} }
+    .tl-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
+    .tl-step.done .tl-label, .tl-step.active .tl-label { color: var(--text); font-weight: 600; }
+
+    @media (max-width: 560px) {
+      .confirm-card { padding: 36px 20px; }
+      .confirm-actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Shop<span>Wave</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="cart.html" class="nav-icon">🛒<span class="cart-badge" style="display:none">0</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="confirm-page">
+    <div class="confirm-card">
+      <div class="success-icon">✅</div>
+      <h1 class="confirm-title">Order Confirmed!</h1>
+      <p class="confirm-sub">Thank you for your order. We've received it and will start processing it right away. A confirmation will be sent to your email.</p>
+
+      <div class="order-id" id="order-id">SW000000</div>
+
+      <!-- Tracking Timeline -->
+      <div class="timeline">
+        <div class="tl-step done">
+          <div class="tl-dot">✓</div>
+          <div class="tl-label">Ordered</div>
+        </div>
+        <div class="tl-step active">
+          <div class="tl-dot">📦</div>
+          <div class="tl-label">Processing</div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-dot">🚚</div>
+          <div class="tl-label">Shipped</div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-dot">🏠</div>
+          <div class="tl-label">Delivered</div>
+        </div>
+      </div>
+
+      <div class="order-details" id="order-details">
+        <div class="od-title">Order Details</div>
+        <div class="od-row"><span>Customer</span><span id="od-name">—</span></div>
+        <div class="od-row"><span>Email</span><span id="od-email">—</span></div>
+        <div class="od-row"><span>Delivery to</span><span id="od-address">—</span></div>
+        <div class="od-row"><span>Est. Delivery</span><span>3–5 business days</span></div>
+        <div class="od-row"><span>Total Paid</span><span id="od-total" style="color:var(--accent);">—</span></div>
+        <div class="order-items" id="od-items"></div>
+      </div>
+
+      <div class="confirm-actions">
+        <a href="products.html" class="btn btn-primary">Continue Shopping →</a>
+        <a href="index.html" class="btn btn-outline">Back to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand"><a href="index.html" class="nav-logo">Shop<span>Wave</span></a><p>Your one-stop destination for curated products.</p></div>
+        <div class="footer-col"><h4>Shop</h4><ul><li><a href="products.html">All Products</a></li></ul></div>
+        <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li></ul></div>
+        <div class="footer-col"><h4>Support</h4><ul><li><a href="#">FAQ</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 ShopWave.</span></div>
+    </div>
+  </footer>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    // Member 3 - Confirmation page
+    const order = JSON.parse(localStorage.getItem('shopwave_order') || '{}');
+
+    if (order.id) {
+      document.getElementById('order-id').textContent = order.id;
+      document.getElementById('od-name').textContent = order.name || '—';
+      document.getElementById('od-email').textContent = order.email || '—';
+      document.getElementById('od-address').textContent = order.address || '—';
+      document.getElementById('od-total').textContent = `$${order.total}`;
+
+      const itemsContainer = document.getElementById('od-items');
+      if (order.items && order.items.length) {
+        itemsContainer.innerHTML = order.items.map(i => `
+          <div class="oi-item">
+            <span class="oi-emoji">${i.emoji}</span>
+            <span class="oi-name">${i.name} ${i.color ? `(${i.color})` : ''} × ${i.qty}</span>
+            <span class="oi-price">$${(i.price * i.qty).toFixed(2)}</span>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Clean up localStorage order after displaying
+    // localStorage.removeItem('shopwave_order'); // Uncomment to clear after showing
+  </script>
+</body>
+</html>

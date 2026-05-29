@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopWave — Modern Shopping</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    /* HERO */
+    .hero {
+      min-height: calc(100vh - var(--nav-height));
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      gap: 60px;
+    }
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(233,69,96,0.08);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+    .hero-title span { color: var(--accent); }
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      max-width: 440px;
+      line-height: 1.7;
+    }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.82rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 520px;
+    }
+    .hero-blob {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(26,26,46,0.06));
+      border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+      animation: blob-morph 8s ease-in-out infinite;
+    }
+    @keyframes blob-morph {
+      0%,100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+      33% { border-radius: 40% 60% 30% 70% / 60% 40% 50% 50%; }
+      66% { border-radius: 50% 50% 40% 60% / 30% 60% 40% 70%; }
+    }
+    .hero-cards {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .hero-mini-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      animation: float 4s ease-in-out infinite;
+      text-align: center;
+    }
+    .hero-mini-card:nth-child(2) { animation-delay: 1s; margin-top: 24px; }
+    .hero-mini-card:nth-child(3) { animation-delay: 0.5s; }
+    .hero-mini-card:nth-child(4) { animation-delay: 1.5s; margin-top: 24px; }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .hero-mini-card .emoji { font-size: 2.2rem; margin-bottom: 10px; }
+    .hero-mini-card .hmc-name { font-weight: 600; font-size: 0.85rem; margin-bottom: 4px; }
+    .hero-mini-card .hmc-price { color: var(--accent); font-weight: 700; font-size: 0.9rem; }
+
+    /* Categories */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .category-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 32px 20px;
+      text-align: center;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      color: var(--text);
+    }
+    .category-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-4px);
+    }
+    .category-icon { font-size: 2.4rem; margin-bottom: 12px; }
+    .category-name { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+    .category-count { font-size: 0.82rem; color: var(--text-muted); }
+
+    /* Banner */
+    .promo-banner {
+      background: var(--primary);
+      border-radius: var(--radius);
+      padding: 60px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+    .promo-banner::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 240px; height: 240px;
+      background: rgba(233,69,96,0.15);
+      border-radius: 50%;
+    }
+    .promo-banner-label {
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+    .promo-banner-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .promo-banner-sub { color: rgba(255,255,255,0.6); font-size: 1rem; }
+    .promo-emoji { font-size: 5rem; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; text-align: center; padding-top: 48px; }
+      .hero-subtitle, .hero-cta { margin-left: auto; margin-right: auto; }
+      .hero-cta { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-visual { display: none; }
+      .categories-grid { grid-template-columns: 1fr 1fr; }
+      .promo-banner { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .categories-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Shop<span>Wave</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="cart.html" class="nav-icon" title="Cart">
+          🛒
+          <span class="cart-badge" style="display:none">0</span>
+        </a>
+        <button class="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section style="background: var(--bg);">
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hero-label">✨ New Collection 2025</div>
+        <h1 class="hero-title">Discover Your<br/>Perfect <span>Style</span></h1>
+        <p class="hero-subtitle">Curated fashion, accessories and lifestyle products delivered to your doorstep. Quality you can feel, prices you'll love.</p>
+        <div class="hero-cta">
+          <a href="products.html" class="btn btn-primary">Shop Now →</a>
+          <a href="about.html" class="btn btn-outline">Our Story</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-num">2K+</div><div class="stat-label">Products</div></div>
+          <div><div class="stat-num">50K+</div><div class="stat-label">Happy Customers</div></div>
+          <div><div class="stat-num">4.9★</div><div class="stat-label">Average Rating</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-blob"></div>
+        <div class="hero-cards" id="hero-cards"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="section" style="background: #fff;">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">Browse By</div>
+        <h2 class="section-title">Shop Categories</h2>
+      </div>
+      <div class="categories-grid">
+        <a href="products.html?category=Clothing" class="category-card">
+          <div class="category-icon">👕</div>
+          <div class="category-name">Clothing</div>
+          <div class="category-count">24 items</div>
+        </a>
+        <a href="products.html?category=Accessories" class="category-card">
+          <div class="category-icon">⌚</div>
+          <div class="category-name">Accessories</div>
+          <div class="category-count">18 items</div>
+        </a>
+        <a href="products.html?category=Electronics" class="category-card">
+          <div class="category-icon">🎧</div>
+          <div class="category-name">Electronics</div>
+          <div class="category-count">12 items</div>
+        </a>
+        <a href="products.html?category=Home" class="category-card">
+          <div class="category-icon">🏠</div>
+          <div class="category-name">Home</div>
+          <div class="category-count">31 items</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCTS -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">Hand-picked</div>
+        <h2 class="section-title">Featured Products</h2>
+        <p class="section-subtitle">Our most loved items this season</p>
+      </div>
+      <div class="products-grid" id="featured-products"></div>
+      <div style="text-align:center; margin-top:48px;">
+        <a href="products.html" class="btn btn-dark">View All Products →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMO BANNER -->
+  <section class="section" style="background: #fff;">
+    <div class="section-inner">
+      <div class="promo-banner">
+        <div>
+          <div class="promo-banner-label">🔥 Limited Time Offer</div>
+          <div class="promo-banner-title">Summer Sale<br/>Up to 40% Off</div>
+          <div class="promo-banner-sub">On selected items. Don't miss out!</div>
+          <a href="products.html" class="btn btn-primary" style="margin-top:24px;">Shop the Sale</a>
+        </div>
+        <div class="promo-emoji">🛍️</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">Shop<span>Wave</span></a>
+          <p>Your one-stop destination for curated fashion, accessories, and lifestyle products.</p>
+          <div class="footer-socials" style="margin-top:20px;">
+            <a href="#">🐦</a><a href="#">📸</a><a href="#">💼</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="products.html?category=Clothing">Clothing</a></li>
+            <li><a href="products.html?category=Accessories">Accessories</a></li>
+            <li><a href="products.html?category=Electronics">Electronics</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 ShopWave. All rights reserved.</span>
+        <span>Made with ❤️ for Web Technology</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    // Hero mini cards
+    const heroCards = document.getElementById('hero-cards');
+    [0,1,2,3].forEach(i => {
+      const p = PRODUCTS[i];
+      heroCards.innerHTML += `
+        <div class="hero-mini-card">
+          <div class="emoji">${p.emoji}</div>
+          <div class="hmc-name">${p.name}</div>
+          <div class="hmc-price">$${p.price}</div>
+        </div>`;
+    });
+
+    // Featured products (first 4 with badge or top rated)
+    const featured = PRODUCTS.filter(p => p.badge || p.rating === 5).slice(0, 4);
+    const grid = document.getElementById('featured-products');
+    featured.forEach(p => {
+      grid.innerHTML += `
+        <div class="product-card">
+          ${p.badge ? `<div class="badge badge-${p.badge}">${p.badge === 'sale' ? '🔥 Sale' : '✨ New'}</div>` : ''}
+          <div class="product-card-img-placeholder">${p.emoji}</div>
+          <div class="product-card-body">
+            <div class="product-card-category">${p.category}</div>
+            <div class="product-card-name">${p.name}</div>
+            <div class="stars">${'★'.repeat(p.rating)}${'☆'.repeat(5 - p.rating)}</div>
+            <div class="product-card-price">
+              $${p.price}
+              ${p.originalPrice ? `<span>$${p.originalPrice}</span>` : ''}
+            </div>
+          </div>
+          <div class="product-card-actions">
+            <a href="product-detail.html?id=${p.id}" class="btn btn-outline">View</a>
+            <button class="btn btn-primary" onclick='Cart.add(${JSON.stringify(p)})'>Add to Cart</button>
+          </div>
+        </div>`;
+    });
+  </script>
+</body>
+</html>

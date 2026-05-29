@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product — ShopWave</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .detail-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+    .breadcrumb a { color: var(--text-muted); transition: var(--transition); }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { color: var(--text); }
+
+    .product-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .product-image-area {
+      background: linear-gradient(135deg, #f0ebe3, #e8e0d5);
+      border-radius: var(--radius);
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10rem;
+      border: 1px solid var(--border);
+      position: sticky;
+      top: calc(var(--nav-height) + 20px);
+    }
+    .product-info {}
+    .product-category {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .product-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem,3vw,2.6rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .product-rating-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .reviews-count { font-size: 0.85rem; color: var(--text-muted); }
+    .product-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .product-price { font-size: 2rem; font-weight: 700; color: var(--primary); }
+    .product-orig { font-size: 1.1rem; color: var(--text-muted); text-decoration: line-through; }
+    .product-save {
+      background: rgba(233,69,96,0.1);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .product-description { color: var(--text-muted); line-height: 1.8; margin-bottom: 28px; }
+
+    .option-label { font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; }
+    .color-options { display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; }
+    .color-btn {
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      background: var(--bg-card);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--text);
+      transition: var(--transition);
+    }
+    .color-btn:hover, .color-btn.active { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+
+    .qty-row { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+    .qty-label { font-size: 0.85rem; font-weight: 600; }
+    .qty-control { display: flex; align-items: center; gap: 0; border: 1.5px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .qty-btn {
+      width: 40px; height: 40px;
+      background: var(--bg);
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--text);
+      transition: var(--transition);
+    }
+    .qty-btn:hover { background: var(--border); }
+    .qty-num { width: 48px; text-align: center; font-weight: 600; font-size: 1rem; border: none; outline: none; font-family: var(--font-body); }
+
+    .action-row { display: flex; gap: 14px; margin-bottom: 32px; }
+    .action-row .btn { flex: 1; justify-content: center; padding: 14px; }
+
+    .product-perks {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 20px;
+      background: var(--bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .perk { display: flex; align-items: center; gap: 12px; font-size: 0.88rem; color: var(--text-muted); }
+    .perk span:first-child { font-size: 1.2rem; }
+
+    .related-section { margin-top: 80px; }
+
+    @media (max-width: 768px) {
+      .product-detail { grid-template-columns: 1fr; gap: 36px; }
+      .product-image-area { position: static; font-size: 6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Shop<span>Wave</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="cart.html" class="nav-icon">🛒<span class="cart-badge" style="display:none">0</span></a>
+        <button class="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="detail-wrap">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> › <a href="products.html">Products</a> › <span id="bc-name">Product</span>
+    </div>
+
+    <div class="product-detail" id="product-detail">
+      <div style="text-align:center;padding:80px;color:var(--text-muted);">Loading…</div>
+    </div>
+
+    <div class="related-section">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <div class="section-label">You May Also Like</div>
+        <h2 class="section-title" style="font-size:1.8rem;">Related Products</h2>
+      </div>
+      <div class="products-grid" id="related-grid"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">Shop<span>Wave</span></a>
+          <p>Your one-stop destination for curated fashion, accessories, and lifestyle products.</p>
+        </div>
+        <div class="footer-col"><h4>Shop</h4><ul><li><a href="products.html">All Products</a></li></ul></div>
+        <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li></ul></div>
+        <div class="footer-col"><h4>Support</h4><ul><li><a href="#">FAQ</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 ShopWave.</span></div>
+    </div>
+  </footer>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    const id = parseInt(new URLSearchParams(window.location.search).get('id'));
+    const product = PRODUCTS.find(p => p.id === id) || PRODUCTS[0];
+    let selectedColor = product.colors[0] || '';
+    let qty = 1;
+
+    document.title = `${product.name} — ShopWave`;
+    document.getElementById('bc-name').textContent = product.name;
+
+    const savings = product.originalPrice ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0;
+
+    document.getElementById('product-detail').innerHTML = `
+      <div class="product-image-area">${product.emoji}</div>
+      <div class="product-info">
+        <div class="product-category">${product.category}</div>
+        <h1 class="product-title">${product.name}</h1>
+        <div class="product-rating-row">
+          <div class="stars">${'★'.repeat(product.rating)}${'☆'.repeat(5-product.rating)}</div>
+          <span class="reviews-count">${product.reviews} reviews</span>
+          ${product.inStock
+            ? '<span style="color:var(--success);font-size:0.85rem;font-weight:600;">✓ In Stock</span>'
+            : '<span style="color:#aaa;font-size:0.85rem;font-weight:600;">✗ Out of Stock</span>'
+          }
+        </div>
+        <div class="product-price-row">
+          <div class="product-price">$${product.price}</div>
+          ${product.originalPrice ? `<div class="product-orig">$${product.originalPrice}</div><div class="product-save">Save ${savings}%</div>` : ''}
+        </div>
+        <p class="product-description">${product.description}</p>
+
+        ${product.colors.length > 0 ? `
+          <div class="option-label">Color: <strong id="selected-color">${selectedColor}</strong></div>
+          <div class="color-options" id="color-options">
+            ${product.colors.map(c => `<button class="color-btn ${c === selectedColor ? 'active' : ''}" data-color="${c}">${c}</button>`).join('')}
+          </div>
+        ` : ''}
+
+        <div class="qty-row">
+          <div class="qty-label">Quantity:</div>
+          <div class="qty-control">
+            <button class="qty-btn" id="qty-minus">−</button>
+            <div class="qty-num" id="qty-display">1</div>
+            <button class="qty-btn" id="qty-plus">+</button>
+          </div>
+        </div>
+
+        <div class="action-row">
+          ${product.inStock
+            ? `<button class="btn btn-primary" id="add-cart-btn">🛒 Add to Cart</button>
+               <a href="cart.html" class="btn btn-outline">View Cart</a>`
+            : `<button class="btn btn-outline" disabled style="opacity:0.5;cursor:not-allowed;">Out of Stock</button>`
+          }
+        </div>
+
+        <div class="product-perks">
+          <div class="perk"><span>🚚</span><span>Free shipping on orders over $50</span></div>
+          <div class="perk"><span>🔄</span><span>30-day hassle-free returns</span></div>
+          <div class="perk"><span>🔒</span><span>Secure checkout with SSL encryption</span></div>
+          <div class="perk"><span>💬</span><span>24/7 customer support</span></div>
+        </div>
+      </div>
+    `;
+
+    // Color selection
+    document.querySelectorAll('.color-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedColor = btn.dataset.color;
+        document.getElementById('selected-color').textContent = selectedColor;
+      });
+    });
+
+    // Qty
+    document.getElementById('qty-minus')?.addEventListener('click', () => { if (qty > 1) { qty--; document.getElementById('qty-display').textContent = qty; } });
+    document.getElementById('qty-plus')?.addEventListener('click', () => { qty++; document.getElementById('qty-display').textContent = qty; });
+
+    // Add to cart
+    document.getElementById('add-cart-btn')?.addEventListener('click', () => {
+      for (let i = 0; i < qty; i++) Cart.add(product, selectedColor);
+    });
+
+    // Related
+    const related = PRODUCTS.filter(p => p.id !== product.id && p.category === product.category).slice(0,4)
+      || PRODUCTS.filter(p => p.id !== product.id).slice(0,4);
+    const relGrid = document.getElementById('related-grid');
+    (related.length ? related : PRODUCTS.filter(p => p.id !== product.id).slice(0,4)).forEach(p => {
+      relGrid.innerHTML += `
+        <div class="product-card">
+          ${p.badge ? `<div class="badge badge-${p.badge}">${p.badge === 'sale' ? '🔥 Sale' : '✨ New'}</div>` : ''}
+          <div class="product-card-img-placeholder">${p.emoji}</div>
+          <div class="product-card-body">
+            <div class="product-card-category">${p.category}</div>
+            <div class="product-card-name">${p.name}</div>
+            <div class="product-card-price">$${p.price}</div>
+          </div>
+          <div class="product-card-actions">
+            <a href="product-detail.html?id=${p.id}" class="btn btn-outline">View</a>
+            <button class="btn btn-primary" onclick='Cart.add(${JSON.stringify(p)})'>Add</button>
+          </div>
+        </div>`;
+    });
+  </script>
+</body>
+</html>
